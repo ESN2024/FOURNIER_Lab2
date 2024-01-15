@@ -52,9 +52,6 @@ int main()
     while(1) {
         // Logique principale ici (si nécessaire)
         
-        
-
-        
     }
 
     return 0;
