@@ -56,7 +56,8 @@ Au préalable le timer est paramétré avec une fréquence de 500 ms dans QSYS. 
 
 ## Démo
 
-https://github.com/ESN2024/FOURNIER_Lab1/assets/124307686/1757a200-f185-4431-8c81-c4e475ceb9fc
+https://github.com/ESN2024/FOURNIER_Lab2/assets/124307686/23a308cc-c77f-41e5-8aa1-909f3612a659
+
 
 ## Conclusion
 
