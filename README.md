@@ -2,8 +2,7 @@
 
 ## Introduction
 
-Ce TP met en pratique les concepts de conception conjointe vus en cours en travaillant avec une carte DE10-Lite équipée d'un FPGA MAX10 10M50DAF484C7G de la gamme Altera. L'objectif principal est de créer un compteur 7 segments avec 3 digits déclenché par une interruption de timer.
-
+Ce TP met en pratique les concepts de conception conjointe abordés en cours en utilisant une carte DE10-Lite équipée d'un FPGA MAX10 10M50DAF484C7G de la gamme Altera. L'objectif principal est de créer un compteur à 3 digits avec affichage 7 segments déclenché par une interruption de timer.
 ## Architecture du Système
 
 Le système comprend l'architecture de base avec :
@@ -16,7 +15,7 @@ Le système comprend l'architecture de base avec :
 - Trois PIO 8 bits pour les 3 7 segments
 - Un Timer
 
-![image](https://github.com/ESN2024/FOURNIER_Lab2/assets/124307686/422a96f5-2896-4845-998c-f63caed12cb8)
+![image](https://github.com/ESN2024/FOURNIER_Lab2/assets/124307686/fbc1512e-5bee-4bea-ba95-e23c8737be42)
 
 
 ## Platform Designer
@@ -27,9 +26,9 @@ L'architecture sous Platform Designer (QSYS) inclut les composants mentionnés a
 
 ## Quartus et pin planner
 
-Dans Quartus, le fichier toplevel.vhd est rédigé et le , et les assignations de broches sont réalisées dans le pin planner. Il faut prendre soin d'assigner les broches qui correspondent aux ajouts mentionnés au-dessus en se référant à la documentation de la carte.
+Dans Quartus, le fichier toplevel.vhd est rédigé, et un autre fichier VHDL est ajouté au projet pour convertir un nombre binaire codé sur 4 bits (cnt) en une représentation 7 segments (seg_bcd_output). Chaque valeur possible de cnt est associée à une configuration spécifique des segments 7, conformément à la logique commune des afficheurs 7 segments. Une fois les signaux reliés dans le top level, les assignations de broches sont effectuées dans le pin planner. Il est essentiel d'assigner correctement les broches pour les ajouts mentionnés en se référant à la documentation de la carte.
 
-![image](https://github.com/ESN2024/FOURNIER_Lab2/assets/124307686/117a082b-90ec-43f0-9cda-46c5d15919f5)
+![image](https://github.com/ESN2024/FOURNIER_Lab2/assets/124307686/efe4975d-4b67-4501-88a4-1339c37658da)
 
 Ensuite, la compilation complète du design est effectuée, le design est flashable sur la carte si aucune erreur n'est présente.
 
@@ -39,29 +38,27 @@ Ensuite, la compilation complète du design est effectuée, le design est flasha
 
 ## Travail Effectué
 
-J'ai créé trois scripts C, chacun réalisant une étape spécifique du projet :
+J'ai découpé ce projet en plusieur partie, chacune réalisant une étape spécifique du projet :
 
-### Chenillard seul
+### Compteur à 1 digit
 
-Une boucle `while` réalise des décalages à gauche et revient à 0 lorsque l'extrémité gauche des LED est atteinte. Pour allumer les différentes LEDs, nous utiliserons la fonction :
-- `IOWR_AERA_AVALON_PIO_DATA(PIO_0_BASE,LED);` où LED est une variable qui définit le numéro des LEDs.
+Une boucle `while` réalise un compteur de 0 à 9 qui retourne à 0 lorsque la valeur atteint 10. Pour allumer l'afficheur 7 segments, la fonction suivante est utilisée :
+- `IOWR_AERA_AVALON_PIO_DATA(PIO_0_BASE, cnt);` où cnt est le compteur. Selon la valeur de cnt, un affichage est effectué selon le paramétrage dans le fichier seg_bcd.vhd.
 
-### Chenillard actionné par un bouton-poussoir
+### Compteur à 3 digit
 
-Utilisation d'une interruption déclenchée par un bouton. La fonction `alt_irq_register(PIO_1_IRQ, NULL, irqhandler_bp);` est utilisée. `irqhandler_bp` est le nom de le fonction de l'interruption du bouton-poussoir.
+La même logique est utilisée, mais pour des nombres allant jusqu'à 999. Lorsque le premier compteur cnt1 atteint la valeur 10, le deuxième compteur est incrémenté pour les dizaines, et ainsi de suite. Une fois que le nombre 999 est atteint (les trois compteurs sont égaux à 9), toutes les valeurs des compteurs sont remises à 0, le tout en allumant les afficheurs 7 segments.
 
-### Chenillard contrôlé en vitesse avec les switchs
+### Compteur à 3 digit avec timer
 
-Les interrupteurs 1 à 8 sont ajoutés au design QSYS, et un masque dans le code logiciel permet de lire la valeur des interrupteurs pour contrôler la variable de temps, affectant ainsi la vitesse. Les fonctions suivantes sont utilisées :
-- `IOWR_ALTERA_AVALON_PIO_IRQ_MASK(PIO_2_BASE, 0x0F);` qui effectue le masque sur les quatre premiers switchs.
-- `IOWR_ALTERA_AVALON_PIO_EDGE_CAP(PIO_2_BASE, 0x0F);` qui effectue la détection du changement d'état switchs.
-Il faut être vigilant au niveau du changement de vitesse pour que les switchs puissent l'effectuer. Il faut que le niveau d'interruption soit plus fort au niveau du switchs que celui du bouton-poussoir. Cela se règle dans QSYS. (voir capture au-dessus)
+Pas de changement majeur ici, sauf l'ajout de la déclaration de l'interruption du timer avec la fonction : `alt_irq_register(TIMER_0_IRQ, NULL, irqhandler);`. avec `irqhandler` le nom de l'interruption. 
+Au préalable le timer est paramétré avec une fréquence de 500 ms dans QSYS. Lorsqu'il y a une occurrence de l'interruption du timer, les étapes précédemment expliquées sont effectuées. Une fois les incrémentations effectuées, le flag d'interruption est effacé.
 
 ## Démo
 
-https://github.com/ESN2024/FOURNIER_Lab1/assets/124307686/1757a200-f185-4431-8c81-c4e475ceb9fc
+https://github.com/ESN2024/FOURNIER_Lab2/assets/124307686/23a308cc-c77f-41e5-8aa1-909f3612a659
+
 
 ## Conclusion
 
-Ce TP nous a permis de prendre en main les outils de conception conjointe, tout en utilisant nos connaissances acquises en cours, particulièrement au niveau des interruptions.
- 
+Ce TP nous a permis de mettre en pratique les concepts de conception conjointe tout en exploitant nos compétences nouvellement acquises, notamment dans la gestion des interruptions. Plus spécifiquement, sur la mise en place d'un afficheur 7 segments, en implémentant un compteurs à trois chiffres.
