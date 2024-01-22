@@ -43,15 +43,9 @@ static void irqhandler(void* context, alt_u32 id)
 
 int main()
 {
-   
-
-    
-    
     alt_irq_register(TIMER_0_IRQ, NULL, irqhandler);
     // Boucle principale
     while(1) {
-        // Logique principale ici (si nécessaire)
-        
     }
 
     return 0;

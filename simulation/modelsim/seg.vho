@@ -16,7 +16,7 @@
 -- PROGRAM "Quartus Prime"
 -- VERSION "Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition"
 
--- DATE "01/15/2024 16:54:54"
+-- DATE "01/22/2024 10:01:59"
 
 -- 
 -- Device: Altera 10M50DAF484C7G Package FBGA484
@@ -2690,13 +2690,6 @@ SIGNAL \auto_hub|instrumentation_fabric_with_node_gen:fabric_gen_new_way:with_jt
 SIGNAL \auto_hub|instrumentation_fabric_with_node_gen:fabric_gen_new_way:with_jtag_input_gen:instrumentation_fabric|instrumentation_fabric|alt_sld_fab|sldfabric|jtag_hub_gen:real_sld_jtag_hub|jtag_ir_reg\ : std_logic_vector(9 DOWNTO 0);
 SIGNAL \auto_hub|instrumentation_fabric_with_node_gen:fabric_gen_new_way:with_jtag_input_gen:instrumentation_fabric|instrumentation_fabric|alt_sld_fab|sldfabric_ident_writedata\ : std_logic_vector(3 DOWNTO 0);
 SIGNAL \auto_hub|instrumentation_fabric_with_node_gen:fabric_gen_new_way:with_jtag_input_gen:instrumentation_fabric|instrumentation_fabric|alt_sld_fab|sldfabric|jtag_hub_gen:real_sld_jtag_hub|identity_contrib_shift_reg\ : std_logic_vector(3 DOWNTO 0);
-SIGNAL \u0|nios2_gen2_0|cpu|ALT_INV_av_ld_rshift8~1_combout\ : std_logic;
-SIGNAL \u0|nios2_gen2_0|cpu|the_seg_nios2_gen2_0_cpu_nios2_oci|ALT_INV_address\ : std_logic_vector(8 DOWNTO 8);
-SIGNAL \u0|nios2_gen2_0|cpu|ALT_INV_D_iw\ : std_logic_vector(2 DOWNTO 2);
-SIGNAL \u0|nios2_gen2_0|cpu|the_seg_nios2_gen2_0_cpu_nios2_oci|the_seg_nios2_gen2_0_cpu_debug_slave_wrapper|seg_nios2_gen2_0_cpu_debug_slave_phy|ALT_INV_virtual_state_sdr~0_combout\ : std_logic;
-SIGNAL \b2|ALT_INV_Mux0~0_combout\ : std_logic;
-SIGNAL \b1|ALT_INV_Mux0~0_combout\ : std_logic;
-SIGNAL \b0|ALT_INV_Mux0~0_combout\ : std_logic;
 SIGNAL \ALT_INV_altera_internal_jtag~TCKUTAPclkctrl_outclk\ : std_logic;
 SIGNAL \u0|rst_controller|ALT_INV_r_sync_rst~clkctrl_outclk\ : std_logic;
 SIGNAL \u0|rst_controller|ALT_INV_merged_reset~0clkctrl_outclk\ : std_logic;
@@ -2705,6 +2698,13 @@ SIGNAL \auto_hub|instrumentation_fabric_with_node_gen:fabric_gen_new_way:with_jt
 SIGNAL \ALT_INV_altera_internal_jtag~TMSUTAP\ : std_logic;
 SIGNAL \u0|rst_controller|ALT_INV_r_early_rst~q\ : std_logic;
 SIGNAL \u0|nios2_gen2_0|cpu|the_seg_nios2_gen2_0_cpu_nios2_oci|the_seg_nios2_gen2_0_cpu_nios2_ocimem|ALT_INV_ociram_wr_en~1_combout\ : std_logic;
+SIGNAL \u0|nios2_gen2_0|cpu|ALT_INV_av_ld_rshift8~1_combout\ : std_logic;
+SIGNAL \u0|nios2_gen2_0|cpu|the_seg_nios2_gen2_0_cpu_nios2_oci|ALT_INV_address\ : std_logic_vector(8 DOWNTO 8);
+SIGNAL \u0|nios2_gen2_0|cpu|ALT_INV_D_iw\ : std_logic_vector(2 DOWNTO 2);
+SIGNAL \u0|nios2_gen2_0|cpu|the_seg_nios2_gen2_0_cpu_nios2_oci|the_seg_nios2_gen2_0_cpu_debug_slave_wrapper|seg_nios2_gen2_0_cpu_debug_slave_phy|ALT_INV_virtual_state_sdr~0_combout\ : std_logic;
+SIGNAL \b2|ALT_INV_Mux0~0_combout\ : std_logic;
+SIGNAL \b1|ALT_INV_Mux0~0_combout\ : std_logic;
+SIGNAL \b0|ALT_INV_Mux0~0_combout\ : std_logic;
 
 BEGIN
 
@@ -3381,13 +3381,6 @@ gnd & gnd & gnd & gnd & gnd & \u0|mm_interconnect_0|cmd_mux|src_payload~1_combou
 \altera_internal_jtag~TCKUTAPclkctrl_INCLK_bus\ <= (vcc & vcc & vcc & \altera_internal_jtag~TCKUTAP\);
 
 \clk_clk~inputclkctrl_INCLK_bus\ <= (vcc & vcc & vcc & \clk_clk~input_o\);
-\u0|nios2_gen2_0|cpu|ALT_INV_av_ld_rshift8~1_combout\ <= NOT \u0|nios2_gen2_0|cpu|av_ld_rshift8~1_combout\;
-\u0|nios2_gen2_0|cpu|the_seg_nios2_gen2_0_cpu_nios2_oci|ALT_INV_address\(8) <= NOT \u0|nios2_gen2_0|cpu|the_seg_nios2_gen2_0_cpu_nios2_oci|address\(8);
-\u0|nios2_gen2_0|cpu|ALT_INV_D_iw\(2) <= NOT \u0|nios2_gen2_0|cpu|D_iw\(2);
-\u0|nios2_gen2_0|cpu|the_seg_nios2_gen2_0_cpu_nios2_oci|the_seg_nios2_gen2_0_cpu_debug_slave_wrapper|seg_nios2_gen2_0_cpu_debug_slave_phy|ALT_INV_virtual_state_sdr~0_combout\ <= NOT \u0|nios2_gen2_0|cpu|the_seg_nios2_gen2_0_cpu_nios2_oci|the_seg_nios2_gen2_0_cpu_debug_slave_wrapper|seg_nios2_gen2_0_cpu_debug_slave_phy|virtual_state_sdr~0_combout\;
-\b2|ALT_INV_Mux0~0_combout\ <= NOT \b2|Mux0~0_combout\;
-\b1|ALT_INV_Mux0~0_combout\ <= NOT \b1|Mux0~0_combout\;
-\b0|ALT_INV_Mux0~0_combout\ <= NOT \b0|Mux0~0_combout\;
 \ALT_INV_altera_internal_jtag~TCKUTAPclkctrl_outclk\ <= NOT \altera_internal_jtag~TCKUTAPclkctrl_outclk\;
 \u0|rst_controller|ALT_INV_r_sync_rst~clkctrl_outclk\ <= NOT \u0|rst_controller|r_sync_rst~clkctrl_outclk\;
 \u0|rst_controller|ALT_INV_merged_reset~0clkctrl_outclk\ <= NOT \u0|rst_controller|merged_reset~0clkctrl_outclk\;
@@ -3397,6 +3390,13 @@ gnd & gnd & gnd & gnd & gnd & \u0|mm_interconnect_0|cmd_mux|src_payload~1_combou
 \ALT_INV_altera_internal_jtag~TMSUTAP\ <= NOT \altera_internal_jtag~TMSUTAP\;
 \u0|rst_controller|ALT_INV_r_early_rst~q\ <= NOT \u0|rst_controller|r_early_rst~q\;
 \u0|nios2_gen2_0|cpu|the_seg_nios2_gen2_0_cpu_nios2_oci|the_seg_nios2_gen2_0_cpu_nios2_ocimem|ALT_INV_ociram_wr_en~1_combout\ <= NOT \u0|nios2_gen2_0|cpu|the_seg_nios2_gen2_0_cpu_nios2_oci|the_seg_nios2_gen2_0_cpu_nios2_ocimem|ociram_wr_en~1_combout\;
+\u0|nios2_gen2_0|cpu|ALT_INV_av_ld_rshift8~1_combout\ <= NOT \u0|nios2_gen2_0|cpu|av_ld_rshift8~1_combout\;
+\u0|nios2_gen2_0|cpu|the_seg_nios2_gen2_0_cpu_nios2_oci|ALT_INV_address\(8) <= NOT \u0|nios2_gen2_0|cpu|the_seg_nios2_gen2_0_cpu_nios2_oci|address\(8);
+\u0|nios2_gen2_0|cpu|ALT_INV_D_iw\(2) <= NOT \u0|nios2_gen2_0|cpu|D_iw\(2);
+\u0|nios2_gen2_0|cpu|the_seg_nios2_gen2_0_cpu_nios2_oci|the_seg_nios2_gen2_0_cpu_debug_slave_wrapper|seg_nios2_gen2_0_cpu_debug_slave_phy|ALT_INV_virtual_state_sdr~0_combout\ <= NOT \u0|nios2_gen2_0|cpu|the_seg_nios2_gen2_0_cpu_nios2_oci|the_seg_nios2_gen2_0_cpu_debug_slave_wrapper|seg_nios2_gen2_0_cpu_debug_slave_phy|virtual_state_sdr~0_combout\;
+\b2|ALT_INV_Mux0~0_combout\ <= NOT \b2|Mux0~0_combout\;
+\b1|ALT_INV_Mux0~0_combout\ <= NOT \b1|Mux0~0_combout\;
+\b0|ALT_INV_Mux0~0_combout\ <= NOT \b0|Mux0~0_combout\;
 
 -- Location: LCCOMB_X44_Y52_N16
 \~QUARTUS_CREATED_GND~I\ : fiftyfivenm_lcell_comb
